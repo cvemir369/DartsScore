@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Welcome to Darts Score</h1>
+
+{% if games_count %}
+    <p><button><a href="{% url 'game_create' %}">Create new game</a></button> <button><a href="{% url 'players' %}">Players</a></button></p>
+    <h2>Active Games:</h2>
+    <ul>
+        {% for game in games %}
+            <li><a href="{% url 'play' pk=game.id %}">id:{{game.id}} - {{ game.get_game_type_display }} - {% for player in game.players.all %} {{ player }} {% endfor %} - {{game.time_modified}}</a></li>
+        {% endfor %}
+    </ul>
+{% elif players_count == 0 %}
+    <p>You don't have any players added yet. Create them now.</p>
+    <button><a href="{% url 'players_create' %}">Create new player</a></button>
+{% elif players_count == 1 %}
+    <p>You have only one player. Create another one.</p>
+    <button><a href="{% url 'players_create' %}">Create new player</a></button>
+{% else %}
+    <p>You don't have any games yet. Create one now.</p>
+    <button><a href="{% url 'game_create' %}">Create new game</a></button>
+{% endif %}
+
+    
+{% endblock content %}

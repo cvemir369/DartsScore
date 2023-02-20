@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ user.username|title }}'s Player List</h1>
+
+    
+    {% if players|length == 0 %}
+        <p>You don't have any players. Create one now.</p>
+    {% endif %}
+
+    <button><a href="{% url 'players_create' %}">Create new player</a></button>
+    <ul>
+        {% for player in players %}
+            <h3><li>{{ player }}</li></h3>
+            <a href="{% url 'players_update' player.pk %}">Edit</a> | <a href="{% url 'players_delete' player.pk %}">Delete</a>
+        {% endfor %}
+    </ul>
+        
+{% endblock content %}
+    

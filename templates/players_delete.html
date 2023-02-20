@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Delete player "{{ player }}"?</h2>
+    <h3>This can not be undone!<br>All related {{ player }}'s game sessions will be deleted too.</h3>
+    <h2>Are you sure?</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, delete</button>
+    </form>
+    <p><a href="{% url 'players' %}">Cancel, go back...</a></p>
+{% endblock content %}
