@@ -1,6 +1,7 @@
 from django.db import models
 from user.models import Player
 from django.contrib.auth import get_user_model
+import uuid
     
     
 class GameChoices(models.IntegerChoices):
@@ -14,6 +15,7 @@ class GameChoices(models.IntegerChoices):
 
 class GameSession(models.Model):    
     """ GameSessions are owned by CustomUser, one CustomUser can have many game sessions """
+    uuid = models.UUIDField(unique=True, default=uuid.uuid4)
     game_type = models.IntegerField(choices=GameChoices.choices, default=GameChoices.DARTS501)
     owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     players = models.ManyToManyField(Player, related_name='game_session')

@@ -10,5 +10,5 @@
     <h3>Are you sure you want to delete this game?</h3>
     <button type="submit">Delete</button>
 </form>
-<p><a href="{% url 'play' pk=game.id %}">Cancel, go back</a></p>
+<p><a href="{% url 'play' uuid=game.uuid %}">Cancel, go back</a></p>
 {% endblock content %}

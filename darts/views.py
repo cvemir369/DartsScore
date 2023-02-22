@@ -30,7 +30,7 @@ class GameCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = GameSession
     form_class = GameCreateForm
     template_name = 'game_create.html'
-    success_url = '/play/{id}'
+    success_url = '/play/{uuid}'
     success_message = 'Game session created successfully'
     
     def form_valid(self, form):
@@ -77,12 +77,16 @@ class GameDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     def get_queryset(self):
         '''Show only if owned by logged in user'''
         return self.model.objects.filter(owner_id=self.request.user)
+    
+    def get_object(self):
+        '''Get object by uuid'''
+        return get_object_or_404(GameSession, uuid=self.kwargs.get("uuid"), owner_id=self.request.user)
 
 
 @login_required
-def reset_game_view(request, pk):
-    """Reset Game Session by pk. Resets players' scores and round"""
-    active_game = get_object_or_404(GameSession, owner_id=request.user, pk=pk)
+def reset_game_view(request, uuid):
+    """Reset Game Session by uuid. Resets players' scores and round"""
+    active_game = get_object_or_404(GameSession, owner_id=request.user, uuid=uuid)
     
     if active_game.game_type == 0:
         game_win_points = 301
@@ -109,16 +113,16 @@ def reset_game_view(request, pk):
         active_game.scores = scores_def
         active_game.undo = scores_def
         active_game.save()
-        return redirect('play', pk=active_game.id)
+        return redirect('play', uuid=active_game.uuid)
     context = {'game': active_game}
     return render(request, 'game_reset.html', context=context)
 
 
 @login_required
-def play_game_view(request, pk):
-    """Gameplay view to show the active game by pk"""
+def play_game_view(request, uuid):
+    """Gameplay view to show the active game by uuid"""
     
-    active_game = get_object_or_404(GameSession, owner_id=request.user, pk=pk)
+    active_game = get_object_or_404(GameSession, owner_id=request.user, uuid=uuid)
     
     # Check game type (301 or 501 or 701, etc.)
     if active_game.game_type == 0:

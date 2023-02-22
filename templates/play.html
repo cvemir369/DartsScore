@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p><a href="{% url 'reset' pk=active_game.id %}">Reset game</a> | <a href="{% url 'game_delete' pk=active_game.id %}">Delete Game</a></p>
+<p><a href="{% url 'reset' uuid=active_game.uuid %}">Reset game</a> | <a href="{% url 'game_delete' uuid=active_game.uuid %}">Delete Game</a></p>
 <h2>{{ active_game.get_game_type_display }}, Double Out</h2>
 <p>Created on {{ active_game.time_created }}</p>
 <form action="" method="post">{% csrf_token %}

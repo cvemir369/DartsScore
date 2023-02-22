@@ -7,7 +7,7 @@ urlpatterns = [
     path('accounts/', include('user.urls')),
     # path('user/', include('django.contrib.auth.urls')),
     path('accounts/', include('allauth.urls')),
-    path('', include('darts.urls')),
+    path('', include('darts.urls')), # disable this line for initial makemigrations
 ]
 
 '''

@@ -8,7 +8,10 @@
     <h2>Active Games:</h2>
     <ul>
         {% for game in games %}
-            <li><a href="{% url 'play' pk=game.id %}">id:{{game.id}} - {{ game.get_game_type_display }} - {% for player in game.players.all %} {{ player }} {% endfor %} - {{game.time_modified}}</a></li>
+            <li>
+                <a href="{% url 'play' uuid=game.uuid %}">{{ game.get_game_type_display }} - {% for player in game.players.all %} {{ player }}{% endfor %}</a>
+                , modified on {{game.time_modified}}
+            </li>
         {% endfor %}
     </ul>
 {% elif players_count == 0 %}
