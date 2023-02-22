@@ -9,8 +9,8 @@
     <ul>
         {% for game in games %}
             <li>
-                <a href="{% url 'play' uuid=game.uuid %}">{{ game.get_game_type_display }} - {% for player in game.players.all %} {{ player }}{% endfor %}</a>
-                , modified on {{game.time_modified}}
+                <a href="{% url 'play' uuid=game.uuid %}">
+                    {{ game.get_game_type_display }}: {% for player in game.players.all %}{% if not forloop.last %}{{ player }} vs {% else %}{{ player }}{% endif %}{% endfor %}</a>, modified on {{game.time_modified|date:'d.m.Y. H:i'}}
             </li>
         {% endfor %}
     </ul>
