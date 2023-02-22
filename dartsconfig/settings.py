@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     # allauth providers
-    # 'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.google',
     # 'allauth.socialaccount.providers.facebook',
     # my apps
     'user',
@@ -151,6 +151,9 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
+# 2 new added:
+SOCIALACCOUNT_QUERY_EMAIL = True
+ACCOUNT_LOGOUT_ON_GET= True
 
 ACCOUNT_LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
@@ -158,6 +161,18 @@ ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
 
 # allauth
 SITE_ID = 1
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
 
 '''
 # Provider specific settings

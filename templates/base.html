@@ -21,6 +21,13 @@
         {% if user.is_authenticated %}
         <a href="{% url 'account_email' %}">Account</a> | <a href="{% url 'players' %}">Players</a> | <a href="{% url 'account_logout' %}">Logout</a>
         | Hi, {{ user.username }}!
+        <img style="width: 20px;" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="">
+        <!-- <p>
+            Date Joined: {{ user.socialaccount_set.all.0.date_joined}}
+            Last Login: {{ user.socialaccount_set.all.0.last_login}}
+            Full Name: {{ user.socialaccount_set.all.0.extra_data.name }}
+            UID: {{ user.socialaccount_set.all.0.uid }}
+        </p> -->
         {% else %}
         <a href="{% url 'account_login' %}">Login</a> | <a href="{% url 'account_signup' %}">Signup</a>
         {% endif %} 

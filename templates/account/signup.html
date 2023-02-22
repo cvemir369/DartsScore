@@ -6,6 +6,10 @@
 <h1>{% trans "Sign Up" %}</h1>
 
 <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+<p>Or simply sign in with one of your existing third party accounts:</p>
+<ul class="socialaccount_providers">
+  {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+</ul>
 
 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
   {% csrf_token %}
