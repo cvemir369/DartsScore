@@ -4,6 +4,8 @@ from django.urls import path, include
 # Static files serve
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.views.generic.base import RedirectView
 
 # Allauth custom urls
 from allauth.utils import importlib
@@ -18,6 +20,10 @@ for provider in providers.registry.get_list():
 
 
 urlpatterns = [
+    path(
+        "favicon.ico",
+        RedirectView.as_view(url=staticfiles_storage.url("images/favicon.ico")),
+    ),
     path('admin/', admin.site.urls),
     path('accounts/', include('user.urls')),
     path('accounts/signup/', signup, name="account_signup"),
