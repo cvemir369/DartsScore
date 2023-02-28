@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
+<p>Last login: {{ user.socialaccount_set.all.0.last_login|date:'d.m.Y. H:i'}}</p>
 <h1>Welcome to Darts Score</h1>
+<img src="{% static 'images/darts.png' %}" alt="Darts">
 
 {% if games_count %}
     <p><button><a href="{% url 'game_create' %}">Create new game</a></button> <button><a href="{% url 'players' %}">Players</a></button></p>
