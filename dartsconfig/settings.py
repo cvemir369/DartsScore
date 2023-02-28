@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     # allauth providers
     'allauth.socialaccount.providers.google',
-    # 'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.facebook',
     # my apps
     'user',
     'darts',
@@ -165,6 +165,7 @@ ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
 # allauth
 SITE_ID = 1
 SOCIALACCOUNT_LOGIN_ON_GET = True # no redirect page
+# ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https' # use *https* instead of the default *http* when trying to login using social account e.g Facebook
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -175,6 +176,28 @@ SOCIALACCOUNT_PROVIDERS = {
         'AUTH_PARAMS': {
             'access_type': 'online',
         }
+    },
+    'facebook': {
+        'METHOD': 'oauth2',
+        'SDK_URL': '//connect.facebook.net/{locale}/sdk.js',
+        'SCOPE': ['email', 'public_profile'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'INIT_PARAMS': {'cookie': True},
+        'FIELDS': [
+            'id',
+            'first_name',
+            'last_name',
+            'middle_name',
+            'name',
+            'name_format',
+            'picture',
+            'short_name'
+        ],
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': 'path.to.callable',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v13.0',
+        'GRAPH_API_URL': 'https://graph.facebook.com/v13.0',
     }
 }
 

@@ -2,6 +2,7 @@
 
 {% block content %}
 <h1>New Game</h1>
+<p>Choose your game type and two of your players.</p>
 <form action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}

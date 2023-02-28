@@ -1,12 +1,17 @@
 {% extends "base.html" %}
 {% load static %}
-{% load account socialaccount %}
+{% load socialaccount %}
+<!-- {% providers_media_js %} -->
 {% block content %}
 
 <h1> Welcome to Darts Score</h1>
 <img src="{% static 'images/darts.png' %}" alt="Darts">
 
-<p>To start using the app, please sign in with your Google account:</p>
+<p>To start using the app, please sign in with your existing account:</p>
 <a href="{% provider_login_url 'google' %}">Sign in with Google</a>
+<br>
+<!-- <a href="{% provider_login_url 'facebook' %}">Sign in with Facebook</a> -->
+
+<a href="{% provider_login_url 'facebook' method='oauth2' %}">Facebook OAuth2</a>
 
 {% endblock %}
