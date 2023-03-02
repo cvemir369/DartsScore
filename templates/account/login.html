@@ -1,17 +1,16 @@
 {% extends "base.html" %}
 {% load static %}
 {% load socialaccount %}
-<!-- {% providers_media_js %} -->
+{% block title %}<title>Darts Score - Login</title>{% endblock title %}
+
 {% block content %}
-
-<h1> Welcome to Darts Score</h1>
-<img src="{% static 'images/darts.png' %}" alt="Darts">
-
-<p>To start using the app, please sign in with your existing account:</p>
-<a href="{% provider_login_url 'google' %}">Sign in with Google</a>
-<br>
-<!-- <a href="{% provider_login_url 'facebook' %}">Sign in with Facebook</a> -->
-
-<!-- <a href="{% provider_login_url 'facebook' method='oauth2' %}">Facebook OAuth2</a> -->
-
+<main class="form-signin w-100 m-auto text-center">
+    <img class="mb-2" src="{% static 'images/darts.png' %}" alt="Darts" width="100">
+    <h1 class="h1 mb-5 fw-normal">Welcome to Darts Score</h1>
+    <h1 class="h5 mb-3 fw-normal">To start tracking your scores, please sign in:</h1>
+    <form>
+        <a href="{% provider_login_url 'google' %}" class="w-80 btn btn-lg btn-dark" type="submit">Sign in with Google</a>
+        <p class="mt-5 mb-3 text-muted">&copy; 2022–2023</p>
+    </form>
+</main>
 {% endblock %}
