@@ -16,6 +16,11 @@ body {
   padding: 15px;
 }
 
+.form-play {
+  max-width: 900px;
+  padding: 15px;
+}
+
 .form-signin .form-floating:focus-within {
   z-index: 2;
 }

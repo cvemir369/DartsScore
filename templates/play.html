@@ -1,88 +1,99 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p><a href="{% url 'reset' uuid=active_game.uuid %}">Reset game</a> | <a href="{% url 'game_delete' uuid=active_game.uuid %}">Delete Game</a></p>
-<h2>{{ active_game.get_game_type_display }}, Double Out</h2>
-<p>Created on {{ active_game.time_created }}</p>
-<form action="" method="post">{% csrf_token %}
-<p><button type="submit" name="undo" value="undo">Undo last score</button> <button type="submit" name="next" value="next">Switch player</button><br><small>Switch player doesn't affect stats.</small></p>
-</form>
-<table>
-  <tr>
-    <th></th>
-    <th><b>{{ p1_real_name }}</b></th>
-    <th><b>{{ p2_real_name }}</b></th>
-  </tr>
-  <tr>
-    <th>Games</th>
-    <td>{{ p1_games }}</td>
-    <td>{{ p2_games }}</td>
-  </tr>
-  <tr>
-    <th>Turn</th>
-    {% if p1_turn %}
-    <td>&check;</td>
-    <td>-</td>
-    {% else %}
-    <td>-</td>
-    <td>&check;</td>
-    {% endif %}
-  </tr>
-  <tr>
-    <th>Points</th>
-    <td><b>{{ p1_points }}</b></td>
-    <td><b>{{ p2_points }}</b></td>
-  </tr>
-  <tr>
-    <th>Game Avg.</th>
-    <td>{{ p1_average }}</td>
-    <td>{{ p2_average }}</td>
-  </tr>
-  <tr>
-    <th>Total Avg.</th>
-    <td>{{ p1_average_total }}</td>
-    <td>{{ p2_average_total }}</td>
-  </tr>
-</table>
+<main class="form-play w-100 m-auto text-center">
+  <div class="mt-2 mb-4">
+    <a class="link-dark" href="{% url 'reset' uuid=active_game.uuid %}">Reset game</a> | 
+    <a class="link-dark" href="{% url 'game_delete' uuid=active_game.uuid %}">Delete Game</a>
+  </div>
+  <h2>{{ active_game.get_game_type_display }}, Double Out</h2>
+  <p>Created on {{ active_game.time_created }}</p>
+  <form action="" method="post">{% csrf_token %}
+    <div class="mt-2 mb-4">
+      <button class="btn btn-dark" type="submit" name="undo" value="undo">Undo last score</button>
+      <button class="btn btn-dark" type="submit" name="next" value="next">Switch player</button>
+      <br><small>Switch player doesn't affect stats.</small>
+    </div>
+  </form>
+  <table class="table">
+    <tr>
+      <th class="table-dark"><h2>{{ p1_real_name }}</h2></th>
+      <th class="table-dark"><h2>{{ p2_real_name }}</h2></th>
+    </tr>
+    <tr>
+      <th class="table-dark">Games</th>
+    </tr>
+    <tr>
+      <td>{{ p1_games }}</td>
+      <td>{{ p2_games }}</td>
+    </tr>
+    <tr>
+      <th class="table-dark">Turn</th>
+      {% if p1_turn %}
+      <td>&check;</td>
+      <td>-</td>
+      {% else %}
+      <td>-</td>
+      <td>&check;</td>
+      {% endif %}
+    </tr>
+    <tr>
+      <th class="table-dark">Points</th>
+      <td><b>{{ p1_points }}</b></td>
+      <td><b>{{ p2_points }}</b></td>
+    </tr>
+    <tr>
+      <th class="table-dark">Game Avg.</th>
+      <td>{{ p1_average }}</td>
+      <td>{{ p2_average }}</td>
+    </tr>
+    <tr>
+      <th class="table-dark">Total Avg.</th>
+      <td>{{ p1_average_total }}</td>
+      <td>{{ p2_average_total }}</td>
+    </tr>
+  </table>
 
-{% if checkout_show %}
-  <h1>{{ checkout }}</h1>
-{% endif %}
-<form action="" method="post">{% csrf_token %}
-<br>
-  <button type="submit" name="1" value="1">1</button>
-  <button type="submit" name="2" value="2">2</button>
-  <button type="submit" name="3" value="3">3</button>
-  <button type="submit" name="4" value="4">4</button>
-  <button type="submit" name="5" value="5">5</button>
-  <button type="submit" name="6" value="6">6</button>
-  <button type="submit" name="7" value="7">7</button>
-  <button type="submit" name="8" value="8">8</button>
-  <button type="submit" name="9" value="9">9</button>
-  <button type="submit" name="10" value="10">10</button>
-  <button type="submit" name="11" value="11">11</button>
-  <button type="submit" name="12" value="12">12</button>
-  <button type="submit" name="13" value="13">13</button>
-  <button type="submit" name="14" value="14">14</button>
-  <button type="submit" name="15" value="15">15</button>
-  <button type="submit" name="16" value="16">16</button>
-  <button type="submit" name="17" value="17">17</button>
-  <button type="submit" name="18" value="18">18</button>
-  <button type="submit" name="19" value="19">19</button>
-  <button type="submit" name="20" value="20">20</button>
-  <button type="submit" name="25" value="25">Bull</button>
-  <br><small>Press buttons to calculate the score or enter manually below.</small>
-  <p>
-    <button type="submit" name="reset_counter" value="0">Score calculated: <b>{{ current_sum }}</b></button>
-    {% if temp_checkout_show %}
-    <b>{{ temp_checkout }}</b>
-    {% endif %}
-    <br><small>Click to reset to 0.</small>
-  </p>
-  <p>Enter score manually: <input type="number" min="0" max="180" name="score_manual" value="score_manual" autofocus></p>
-  {% if checkout_show %}<p>Darts used for checkout: <input type="number" min="1" max="3" name="checkout_darts_used" value="3"></p>{% endif %}
-  <button type="submit" name="submit_score" value="submit_score"><b>Submit score</b></button>
-  <p><button type="submit" name="bust" value="0">Bust, no score</button></p>
-</form>
-
+  {% if checkout_show %}
+    <h1>{{ checkout }}</h1>
+  {% endif %}
+  <form action="" method="post">{% csrf_token %}
+    <br>
+    <div class="btn-group" role="group">
+      <button class="btn btn-outline-dark" type="submit" name="1" value="1">1</button>
+      <button class="btn btn-outline-dark" type="submit" name="2" value="2">2</button>
+      <button class="btn btn-outline-dark" type="submit" name="3" value="3">3</button>
+      <button class="btn btn-outline-dark" type="submit" name="4" value="4">4</button>
+      <button class="btn btn-outline-dark" type="submit" name="5" value="5">5</button>
+      <button class="btn btn-outline-dark" type="submit" name="6" value="6">6</button>
+      <button class="btn btn-outline-dark" type="submit" name="7" value="7">7</button>
+      <button class="btn btn-outline-dark" type="submit" name="8" value="8">8</button>
+      <button class="btn btn-outline-dark" type="submit" name="9" value="9">9</button>
+      <button class="btn btn-outline-dark" type="submit" name="10" value="10">10</button>
+      <button class="btn btn-outline-dark" type="submit" name="11" value="11">11</button>
+      <button class="btn btn-outline-dark" type="submit" name="12" value="12">12</button>
+      <button class="btn btn-outline-dark" type="submit" name="13" value="13">13</button>
+      <button class="btn btn-outline-dark" type="submit" name="14" value="14">14</button>
+      <button class="btn btn-outline-dark" type="submit" name="15" value="15">15</button>
+      <button class="btn btn-outline-dark" type="submit" name="16" value="16">16</button>
+      <button class="btn btn-outline-dark" type="submit" name="17" value="17">17</button>
+      <button class="btn btn-outline-dark" type="submit" name="18" value="18">18</button>
+      <button class="btn btn-outline-dark" type="submit" name="19" value="19">19</button>
+      <button class="btn btn-outline-dark" type="submit" name="20" value="20">20</button>
+      <button class="btn btn-outline-dark" type="submit" name="25" value="25">Bull</button>
+    </div>
+    <br><small>Press buttons to calculate the score or enter manually below.</small>
+    <p>
+      <button class="btn btn-secondary" type="submit" name="reset_counter" value="0">Score calculated: <b>{{ current_sum }}</b></button>
+      {% if temp_checkout_show %}
+      <b>{{ temp_checkout }}</b>
+      {% endif %}
+      <br><small>Click to reset to 0.</small>
+    </p>
+    <p>Enter score manually: <input type="number" min="0" max="180" name="score_manual" value="score_manual" autofocus></p>
+    {% if checkout_show %}<p>Darts used for checkout: <input type="number" min="1" max="3" name="checkout_darts_used" value="3"></p>{% endif %}
+    <button class="btn btn-success" type="submit" name="submit_score" value="submit_score"><b>Submit score</b></button>
+    <button class="btn btn-danger" type="submit" name="bust" value="0">Bust, no score!</button>
+  </form>
+</main>
 {% endblock content %}
