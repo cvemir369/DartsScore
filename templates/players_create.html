@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 <main class="form-signin w-100 m-auto text-center">
     <h1 class="mt-2 mb-2">New player</h1>
     <form class="mt-4 mb-4" action="" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form|crispy }}
         <button class="btn btn-dark" type="submit">Create</button>
     </form>
 </main>
