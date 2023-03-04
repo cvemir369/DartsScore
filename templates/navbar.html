@@ -1,5 +1,5 @@
 {% load static %}
-<header class="p-1 mb-3 border-bottom">
+<header class="p-1 mb-1 border-bottom">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
@@ -32,21 +32,3 @@
         </div>
     </div>
 </header>
-
-<!-- <nav>
-    <img width="20px" src="{% static 'images/darts.png' %}" alt="Darts">
-    <a href="{% url 'home' %}">Home</a> | 
-    {% if user.is_authenticated %}
-    <a href="{% url 'players' %}">Players</a> | <a href="{% url 'account_logout' %}">Sign out</a>
-    | Hi, {{ user.username }}!
-    <img style="width: 20px; border-radius:50%;" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="">
-
-    Date Joined: {{ user.socialaccount_set.all.0.date_joined}}
-    Last login: {{ user.socialaccount_set.all.0.last_login|date:'d.m.Y. H:i'}}
-    Full Name: {{ user.socialaccount_set.all.0.extra_data.name }}
-    UID: {{ user.socialaccount_set.all.0.uid }}
-
-    {% else %}
-    <a href="{% url 'account_login' %}">Sign in</a>
-    {% endif %} 
-</nav> -->

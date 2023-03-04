@@ -207,7 +207,7 @@ def play_game_view(request, uuid):
             scores_dict['turn']['player1'] = False if scores_dict['turn']['player1'] else True
             scores_dict['turn']['player2'] = False if scores_dict['turn']['player2'] else True
             active_game.current_sum = 0
-            messages.success(request, 'Player switched.')
+            # messages.success(request, 'Player switched.')
 
         elif request.POST.get('score_manual') or request.POST.get('submit_score'):
             active_game.undo = copy.deepcopy(scores_dict) # save last state for undo

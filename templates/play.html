@@ -2,64 +2,62 @@
 
 {% block content %}
 <main class="form-play w-100 m-auto text-center">
-  <div class="mt-2 mb-4">
+  <div class="mt-2 mb-1">
     <a class="link-dark" href="{% url 'reset' uuid=active_game.uuid %}">Reset game</a> | 
     <a class="link-dark" href="{% url 'game_delete' uuid=active_game.uuid %}">Delete Game</a>
   </div>
   <h2>{{ active_game.get_game_type_display }}, Double Out</h2>
-  <p>Created on {{ active_game.time_created }}</p>
-  <form action="" method="post">{% csrf_token %}
-    <div class="mt-2 mb-4">
+  <p class="mb-1">Created on {{ active_game.time_created }}</p>
+  <form class="mt-2 mb-2" action="" method="post">{% csrf_token %}
+    <div class="mt-2 mb-1">
       <button class="btn btn-dark" type="submit" name="undo" value="undo">Undo last score</button>
       <button class="btn btn-dark" type="submit" name="next" value="next">Switch player</button>
       <br><small>Switch player doesn't affect stats.</small>
     </div>
   </form>
-  <table class="table">
-    <tr>
-      <th class="table-dark"><h2>{{ p1_real_name }}</h2></th>
-      <th class="table-dark"><h2>{{ p2_real_name }}</h2></th>
-    </tr>
-    <tr>
-      <th class="table-dark">Games</th>
-    </tr>
-    <tr>
-      <td>{{ p1_games }}</td>
-      <td>{{ p2_games }}</td>
-    </tr>
-    <tr>
-      <th class="table-dark">Turn</th>
-      {% if p1_turn %}
-      <td>&check;</td>
-      <td>-</td>
-      {% else %}
-      <td>-</td>
-      <td>&check;</td>
-      {% endif %}
-    </tr>
-    <tr>
-      <th class="table-dark">Points</th>
-      <td><b>{{ p1_points }}</b></td>
-      <td><b>{{ p2_points }}</b></td>
-    </tr>
-    <tr>
-      <th class="table-dark">Game Avg.</th>
-      <td>{{ p1_average }}</td>
-      <td>{{ p2_average }}</td>
-    </tr>
-    <tr>
-      <th class="table-dark">Total Avg.</th>
-      <td>{{ p1_average_total }}</td>
-      <td>{{ p2_average_total }}</td>
-    </tr>
-  </table>
-
+  <div class="table-score mt-1 mb-1">
+    <table class="table">
+      <tr>
+        {% if p1_turn %}
+        <th class="table-dark table-active-player"><h1>{{ p1_real_name }}</h1></th>
+        <th class="table-dark">VS</th>
+        <th class="table-dark"><h1>{{ p2_real_name }}</h1></th>
+        {% else %}
+        <th class="table-dark"><h1>{{ p1_real_name }}</h1></th>
+        <th class="table-dark">VS</th>
+        <th class="table-dark table-active-player"><h1>{{ p2_real_name }}</h1></th>
+        {% endif %}
+        <tr><td colspan="3"></td></tr>
+        <tr>
+          <td><h1>{{ p1_points }}</h1></td>
+          <th class="table-dark table-header">Points</th>
+          <td><h1>{{ p2_points }}</h1></td>
+        </tr>
+      </tr>
+      <tr>
+        <td>{{ p1_games }}</td>
+        <th class="table-dark table-header">Games</th>
+        <td>{{ p2_games }}</td>
+      </tr>
+      <tr>
+        <td>{{ p1_average }}</td>
+        <th class="table-dark table-header">Game Avg.</th>
+        <td>{{ p2_average }}</td>
+      </tr>
+      <tr>
+        <td>{{ p1_average_total }}</td>
+        <th class="table-dark table-header">Total Avg.</th>
+        <td>{{ p2_average_total }}</td>
+      </tr>
+      <tr><td colspan="3"></td></tr>
+      <tr><th colspan="3" class="table-dark table-header"></th></tr>
+    </table>
+  </div>
   {% if checkout_show %}
-    <h1>{{ checkout }}</h1>
+    <h1 class="mt-2 mb-2">{{ checkout }}</h1>
   {% endif %}
-  <form action="" method="post">{% csrf_token %}
-    <br>
-    <div class="btn-group" role="group">
+  <form class="mt-1 mb-1" action="" method="post">{% csrf_token %}
+    <div class="btn-group mt-1 mb-1" role="group">
       <button class="btn btn-outline-dark" type="submit" name="1" value="1">1</button>
       <button class="btn btn-outline-dark" type="submit" name="2" value="2">2</button>
       <button class="btn btn-outline-dark" type="submit" name="3" value="3">3</button>
@@ -83,7 +81,7 @@
       <button class="btn btn-outline-dark" type="submit" name="25" value="25">Bull</button>
     </div>
     <br><small>Press buttons to calculate the score or enter manually below.</small>
-    <p>
+    <p class="mt-1 mb-1">
       <button class="btn btn-secondary" type="submit" name="reset_counter" value="0">Score calculated: <b>{{ current_sum }}</b></button>
       {% if temp_checkout_show %}
       <b>{{ temp_checkout }}</b>
