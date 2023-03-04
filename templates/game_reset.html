@@ -7,7 +7,7 @@
     <p>All stats will reset too.</p>
     <form action="" method="post">
         {% csrf_token %}
-        <button class="btn btn-dark" type="submit">Reset</button>
+        <button class="btn btn-dark btn-block" type="submit">Reset</button>
     </form>
     <div class="mt-2"><a class="link-dark" href="{% url 'play' uuid=game.uuid %}">Cancel, go back</a></div>
 </main>
