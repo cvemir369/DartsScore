@@ -3,35 +3,37 @@
 {% block content %}
 
 <main class="form-signin w-100 m-auto text-center">
+    <img class="mb-2" src="{% static 'images/darts.png' %}" alt="Darts" width="100">
+    <h1 class="h1 mb-5 fw-normal">Welcome to Darts Score</h1>
     {% if games_count %}
     <div class="mt-2 mb-4">
         <a class="btn btn-dark" type="button" href="{% url 'game_create' %}">New game</a>
         <a class="btn btn-dark" type="button" href="{% url 'players' %}">Players</a>
     </div>
     <h1 class="h4 mb-2 fw-normal">Active games:</h1>
-    {% for game in games %}
-        <div class="list-group w-auto">
-            <a href="{% url 'play' uuid=game.uuid %}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-                <img src="{% static 'images/darts.png' %}" alt="Darts" width="35" height="35" class="rounded-circle flex-shrink-0">
-                <div class="d-flex gap-2 w-100 justify-content-between">
-                <div>
-                    <h6 class="mb-0">{{ game.get_game_type_display }}</h6>
-                    <p class="mb-0 opacity-75">{% for player in game.players.all %}{% if not forloop.last %}{{ player }} vs {% else %}{{ player }}{% endif %}{% endfor %}</p>
-                </div>
-                <small class="opacity-50 text-nowrap">modified on {{game.time_modified|date:'d.m.Y. H:i'}}</small>
-                </div>
-            </a>
-        </div>
-    {% endfor %}
+        {% for game in games %}
+            <div class="list-group w-auto">
+                <a href="{% url 'play' uuid=game.uuid %}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                    <img src="{% static 'images/darts.png' %}" alt="Darts" width="35" height="35" class="rounded-circle flex-shrink-0">
+                    <div class="d-flex gap-2 w-100 justify-content-between">
+                    <div>
+                        <h6 class="mb-0">{{ game.get_game_type_display }}</h6>
+                        <p class="mb-0 opacity-75">{% for player in game.players.all %}{% if not forloop.last %}{{ player }} vs {% else %}{{ player }}{% endif %}{% endfor %}</p>
+                    </div>
+                    <small class="opacity-50 text-nowrap">modified on {{game.time_modified|date:'d.m.Y. H:i'}}</small>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
     {% elif players_count == 0 %}
-        <p>You don't have any players added yet. Create them now.</p>
-        <button><a href="{% url 'players_create' %}">Create new player</a></button>
+        <h1 class="h5 mb-3 fw-normal">You don't have any players.<br>To start playing, create one now:</h1>
+        <a class="btn btn-dark" type="submit" href="{% url 'players_create' %}">Create new player</a>
     {% elif players_count == 1 %}
-        <p>You have only one player. Create another one.</p>
-        <button><a href="{% url 'players_create' %}">Create new player</a></button>
+        <h1 class="h5 mb-3 fw-normal">You have only one player. Create another one.</h1>
+        <a class="btn btn-dark" type="submit" href="{% url 'players_create' %}">Create new player</a>
     {% else %}
-        <p>You don't have any games yet. Create one now.</p>
-        <button><a href="{% url 'game_create' %}">Create new game</a></button>
+        <h1 class="h5 mb-3 fw-normal">You don't have any games yet. Create one now.</h1>
+        <a class="btn btn-dark" type="submit" href="{% url 'game_create' %}">Create new game</a>
     {% endif %}
 </main>
     

@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Reset Game</h1>
-<h3>Are you sure you want to reset this game?</h3>
-<form action="" method="post">
-    {% csrf_token %}
-    <button type="submit">Reset</button>
-</form>
-<p><a href="{% url 'play' uuid=game.uuid %}">Cancel, go back</a></p>
+<main class="form-signin w-100 m-auto text-center">
+    <h1 class="mt-2 mb-2">Reset Game</h1>
+    <h3>Are you sure you want to reset this game?</h3>
+    <p>All stats will reset too.</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        <button class="btn btn-dark" type="submit">Reset</button>
+    </form>
+    <div class="mt-2"><a class="link-dark" href="{% url 'play' uuid=game.uuid %}">Cancel, go back</a></div>
+</main>
 {% endblock content %}

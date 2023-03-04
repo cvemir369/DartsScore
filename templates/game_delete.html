@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Delete Game</h1>
-<form action="" method="post">
-    {% csrf_token %}
-    <h2>Game Type: {{ game.get_game_type_display }}</h2>
-    <h3>Players: {% for player in game.players.all %} {{ player }}{% endfor %}</h3>
-    <p>Created on {{ game.time_created }}</p>
-    <h3>Are you sure you want to delete this game?</h3>
-    <button type="submit">Delete</button>
-</form>
-<p><a href="{% url 'play' uuid=game.uuid %}">Cancel, go back</a></p>
+<main class="form-signin w-100 m-auto text-center">
+    <h1 class="mt-2 mb-2">Delete Game</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <h3>Game Type: {{ game.get_game_type_display }}</h3>
+        <p>Players: {% for player in game.players.all %} {{ player }},{% endfor %} created on {{ game.time_created|date:'d.m.Y. H:i' }}</p>
+        <h3>Are you sure you want to delete this game?</h3>
+        <button class="btn btn-danger" type="submit">Delete</button>
+    </form>
+    <div class="mt-2"><a class="link-dark" href="{% url 'play' uuid=game.uuid %}">Cancel, go back</a></div>
+</main>
 {% endblock content %}

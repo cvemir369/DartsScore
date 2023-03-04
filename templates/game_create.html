@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>New Game</h1>
-<p>Choose your game type and two of your players.</p>
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Start Game</button>
-</form>
+<main class="form-signin w-100 m-auto text-center">
+    <h1>New Game</h1>
+    <p>Choose your game type and two of your players.</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-dark" type="submit">Start Game</button>
+    </form>
+</main>
 {% endblock content %}

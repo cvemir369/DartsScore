@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Delete player "{{ player }}"?</h2>
-    <h3>This can not be undone!<br>All related {{ player }}'s game sessions will be deleted too.</h3>
-    <h2>Are you sure?</h2>
+<main class="form-signin w-100 m-auto text-center">
+    <h1 class="mt-2 mb-4">Delete player "{{ player }}"?</h1>
+    <p>
+        All related {{ player }}'s game sessions will be deleted too. <br>
+       <strong style="color: red;">This can not be undone!</strong>
+    </p>
+    <h4 class="mt-4 mb-2">Are you sure?</h4>
     <form action="" method="post">
         {% csrf_token %}
-        <button type="submit">Yes, delete</button>
+        <button class="btn btn-danger" type="submit">Yes, delete</button>
     </form>
-    <p><a href="{% url 'players' %}">Cancel, go back...</a></p>
+    <div class="mt-2"><a class="link-dark" href="{% url 'players' %}">Cancel, go back...</a></div>
+</main>
 {% endblock content %}

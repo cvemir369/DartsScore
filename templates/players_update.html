@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Update "{{ player }}"</h1>
+<main class="form-signin w-100 m-auto text-center">
+    <h1 class="mt-2 mb-4">Update "{{ player }}"</h1>
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Update</button>
+        <button class="btn btn-dark" type="submit">Update</button>
     </form>
-    <p><a href="{% url 'players' %}">Cancel, go back</a></p>
+    <div class="mt-2"><a class="link-dark" href="{% url 'players' %}">Cancel, go back</a></div> 
+</main>
 {% endblock content %}

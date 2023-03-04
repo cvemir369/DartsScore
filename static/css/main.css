@@ -38,9 +38,15 @@ body {
 }
 
 .table {
-  width: 90%;
+  width: 80%;
   vertical-align: middle;
   margin: auto;
+  table-layout: fixed;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.table thead {
+  vertical-align: middle;
 }
 
 .table-score {
@@ -48,7 +54,7 @@ body {
 }
 
 .table-points {
-  font-size: x-large;
+  font-size: 40px;
 }
 
 .table-header {
@@ -57,4 +63,8 @@ body {
 
 .table-active-player {
   text-decoration: underline;
+}
+
+.checkout {
+  font-size: 60px;
 }
